@@ -1,19 +1,56 @@
-import { useAppStore } from "../hooks/useStore";
+import { useEffect, useRef, useState } from "react";
+import Lenis from "lenis";
+import backgroundIntro from "@/assets/images/background-intro.jpg";
+import Person from "@/assets/images/person.png";
 
 export default function Home() {
-  const count = useAppStore((state) => state.count);
-  const increment = useAppStore((state) => state.increment);
+  const imgRef = useRef<HTMLImageElement>(null);
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const lenis = new Lenis();
+
+    const raf = (time: number) => {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    };
+    requestAnimationFrame(raf);
+
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const scale = Math.max(1, 1.2 - scrollY / 1000);
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold">React Base com Zustand</h1>
-      <p className="mt-4">Contador: {count}</p>
-      <button
-        className="bg-blue-500 text-white px-4 py-2 rounded"
-        onClick={increment}
-      >
-        Incrementar
-      </button>
+    <div className="">
+      <div className="h-[100vh] w-full overflow-hidden relative">
+        <div className="flex-1 w-full h-full absolute z-20 flex justify-center">
+            <p className="text-white text-[100px]">GTA</p>
+        </div>
+        <img
+          ref={imgRef}
+          src={backgroundIntro}
+          alt="Background"
+          className="w-full h-full object-cover transition-transform duration-75 ease-out"
+          style={{ transform: `scale(${scale})` }}
+        />
+        <img
+          ref={imgRef}
+          src={Person}
+          alt="Background"
+          className="w-full z-30 h-full object-cover transition-transform duration-75 ease-out"
+          style={{ transform: `scale(${scale})` }}
+        />
+      </div>
+
+      <div className="h-[100vh] w-full bg-red-50" ></div>
     </div>
   );
 }

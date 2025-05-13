@@ -3,8 +3,9 @@ import { router } from "./router";
 import { Toaster } from "@/components/ui/toaster";
 
 function App() {
+
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-900">
+    <div className=" bg-black text-gray-900">
       <RouterProvider router={router} />
       <Toaster />
     </div>
