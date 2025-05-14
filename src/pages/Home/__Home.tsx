@@ -50,7 +50,7 @@ export default function Home() {
   );
   const scale2 = scaleStart - (scaleStart - scaleEnd) * scaleProgress;
 
-  const backgroundOpacity = scrollY >= 175 ? 1 : 0;
+  const backgroundOpacity = scrollY >= 170 ? 1 : 0;
   console.log(scrollY);
   return (
     <div className="relative h-[500vh]">
