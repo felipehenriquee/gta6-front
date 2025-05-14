@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import Lenis from "lenis";
 import backgroundIntro from "@/assets/images/background-intro.jpg";
 import Person from "@/assets/images/person.png";
+import Logo from "@/assets/images/logo.svg";
+import "./Home.css";
 
 export default function Home() {
   const imgRef = useRef<HTMLImageElement>(null);
@@ -27,7 +29,7 @@ export default function Home() {
   }, []);
 
   const scale = Math.max(1, 1.2 - scrollY / 1000);
-  const scale2 = Math.max(1, 190 - (scrollY * 0.18));
+  const scale2 = Math.max(1, 190 - scrollY * 0.18);
   return (
     <div className="relative h-[500vh]">
       <div className="h-[100vh] w-full overflow-hidden fixed">
@@ -51,21 +53,11 @@ export default function Home() {
       </div>
 
       <div className="fixed h-[100vh] top-0 w-full flex justify-center items-center">
-        <div className="inset-0 flex justify-center items-center z-30 pointer-events-none">
-          <h1
-            className="text-[20px] font-extrabold  text-transparent pricedown"
-            style={{
-              transform: `scale(${scale2})`,
-              WebkitTextStroke: "2px black",
-              mixBlendMode: "overlay",
-            }}
-          >
-            grand
-            <br />
-            theft
-            <br />
-            auto
-          </h1>
+        <div
+          className="inset-0 flex flex-col justify-center z-30 pointer-events-none"
+          style={{ transform: `scale(${scale2})` }}
+        >
+          <img src={Logo} alt="" />
         </div>
       </div>
     </div>
